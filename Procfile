@@ -1,0 +1,1 @@
+web: gunicorn threedchat.wsgi --log-file -

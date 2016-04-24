@@ -1,0 +1,314 @@
+/* Importing Font from Google Fonts*/
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
+
+/* Giving the entire text in the app the same font*/
+body{
+    font-family: 'Lato', sans-serif;
+}
+
+/* Scaling font size for h1,h2,h4*,fa */
+h1{
+    font-size:10vh;
+}
+h2{
+    font-size:3vh;
+}
+h4{
+    font-size:3vh;
+}
+.fa{
+    font-size:10vh;
+}
+/* on hover links use pointer instead of default */
+a{
+    cursor: pointer;
+}
+
+/* Index Styling begin */
+/* adjusting location of buttons */
+.chatNow-btn{
+    margin-top:4vh;
+    font-size:3vh;
+}
+
+/* Giving space between buttons*/
+#signin-btn{
+    margin-right:3vw;
+}
+
+/* Styling NavBar*/
+.navbar-default{
+    background-color:#3f3f3f;
+    border:0;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:visited  {
+    color: white;
+}
+.navbar-default .navbar-nav > li > a:hover{
+    color: #8cc34b;
+}
+
+.navbar-brand{
+    margin-top: -10px;
+}
+
+.top-right-nav{
+    padding-top: 15px;
+    line-height: 20px;
+    color: white;
+}
+
+#nav-chatrooms{
+    margin:0;
+}
+
+/* adding background and scaling intro section */
+.intro-section{
+    height:auto;
+    background-image: url('../../../static/media/swirl_pattern.png');
+}
+
+.intro-section-content{
+    padding-top:5vh;
+    padding-bottom:5vh;
+}
+#subheader{
+    font-weight: bolder;
+}
+
+.section-head{
+    padding-bottom:10vh;
+}
+
+/* Why Section Styling Begin*/
+.why-section{
+    background-color:#696969;
+    padding:30px;
+    color:white;
+}
+
+.why-element{
+    padding-bottom:10vh;
+
+}
+
+.typed-cursor{
+    display:none;
+}
+/* Why Section Styling End*/
+/* Index Styling begin */
+
+/* Chatrooms Section Styling Begin*/
+#chat-room-body{
+    background-color: #696969;
+}
+.jumbotron{
+    width: 70vw;
+    height: 100vh;
+    padding-top:2vh;
+    padding-bottom:2vh;
+    margin:auto;
+}
+
+#join-button{
+    height:100%;
+    width: 100%;
+    background-color: #72B763;
+    border:none;
+    font-size: 3vh;
+}
+
+#join-button:hover{
+    height:100%;
+    width: 100%;
+    background-color:#72B763; 
+}
+
+#join-text{
+    padding-bottom:3vh;
+    font-size:3vh;
+}
+
+#pages{
+    margin-left:auto;
+    margin-right:auto;
+    width: 0;
+    margin-bottom:5vh;
+    display:flex;
+    font-size: 2vh;
+}
+
+#pages > a{
+    margin-right:20px;
+}
+
+.panel {
+    background-color: #EEEEEE;
+    margin: 0 auto;
+    height: 130px;  
+    position: relative;
+    margin-bottom: 10vh;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+}
+
+.panel .front,
+.panel .back {
+    text-align: center;
+}
+    
+.panel .front {
+    height: inherit;
+    position: absolute;
+    top: 0;
+    z-index: 900;
+    text-align: center;
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+       -moz-transform: rotateX(0deg) rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+    -webkit-transition: all .4s ease-in-out;
+       -moz-transition: all .4s ease-in-out;
+        -ms-transition: all .4s ease-in-out;
+         -o-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+}
+
+.panel .back {
+    height: inherit;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    -webkit-transform: rotateY(-180deg);
+       -moz-transform: rotateY(-180deg);
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+    -webkit-transition: all .4s ease-in-out;
+       -moz-transition: all .4s ease-in-out;
+        -ms-transition: all .4s ease-in-out;
+         -o-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+}
+.panel.flip .front {
+    z-index: 900;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+}
+.panel.flip .back {
+
+    z-index: 1000;
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+    -moz-transform: rotateX(0deg) rotateY(0deg);
+}
+.box1{
+    background-color: white;
+    width: 250px;
+    height: 150px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.box2{
+    background-color: #72B763;
+    width: 250px;
+    height: 150px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+
+}
+
+/* Chatrooms Section Styling End*/
+
+/* Chat Styling Begin*/
+.active-chat{
+    height:97vh;
+    background-color:#3f3f3f;
+    padding-top:5vh;
+}
+.active-chat-left{
+    color:white;
+}
+#chat-history{
+    overflow-y:scroll;
+    height:44vh; 
+}
+.active-chat-container{
+    padding-bottom:10vh;
+}
+
+#chatMessages{
+    color: white;
+    position: absolute;
+    z-index: 9999;
+    padding-top: 10vh;
+    padding-left: 5vw;
+
+}
+.message-text-wrapper{
+    border:1px solid white;
+    border-radius: 100px;
+    padding: 2vh;
+    width: 29vh;
+}
+
+#info{
+    visibility: hidden;
+}
+
+#peerUserName{
+    font-size: 2vh;
+
+}
+
+#chat-msgs-header{
+    margin-top:5vh;
+    font-size: 2vh;
+}
+
+#statusMsg{
+    color: green;
+}
+
+/* Chat Styling End*/
+
+/* Forms Styling Begin*/
+.body-forms{
+    background-image: url('../../../static/media/swirl_pattern.png');
+
+}
+.form-container{
+    margin-left: auto;
+    margin-right:auto;
+    width:30vw;
+    margin-top: 20vh;
+    border:1px solid;
+    padding:10vh;
+    background-color: white;
+}
+
+#error_msg{
+    color: red;
+}
+/* Forms Styling End*/
+
+
+/* General for Browser Checking*/
+
+#not-chrome-error{
+    display:none;
+}
+
+
+
+

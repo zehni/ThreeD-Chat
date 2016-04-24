@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <title>3D Chat | Speak Your Language</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../static/css/custom.css">
+  </head>
+  <body>
+    <div class="full-container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="../../../static/media/logo.png" alt="logo"></a>
+          </div>
+          <!-- Collect the nav links for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="/chatrooms/1">Chat Rooms</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {% if user.is_authenticated %}
+              <li><p class="top-right-nav">Welcome {{request.user}}</p></li>
+              <li><a href="/logout/">Log Out</a></li>
+              {%else%}
+              <li><p class="top-right-nav">Welcome Guest</p></li>
+              {%endif%}
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      <div class="alert alert-danger" id="not-chrome-error"role="alert">This application doesn't work with your browser, please use Google Chrome!</div>
+      <div class="col-xs-12 text-center intro-section">
+          <div class="intro-section-content">
+              <h1>Welcome to <span id="typed"></span></h1>
+              <h2 id="subheader">Chat in your native language</h2>
+              {% if user.is_authenticated == False %}
+              <a href="/login/"><button class="btn btn-success btn-lg chatNow-btn" id="signin-btn">Sign In</button></a>
+              <a href="/register/"><button class="btn btn-primary btn-lg chatNow-btn">New Here?</button></a>
+              {% endif %}
+          </div>
+      </div>
+      <div class="col-xs-12 text-center why-section">
+        <h1 class="section-head">Why 3D Chat?</h1>
+        <div class="col-xs-6 why-element">
+          <i class="fa fa-plus fa-4x"></i>
+          <h4>Create Chat Rooms</h4>
+        </div>
+        <div class="col-xs-6 why-element">
+          <i class="fa fa-language fa-4x"></i>
+          <h4>Choose your language</h4>
+        </div>
+        <div class="col-xs-6 why-element">
+          <i class="fa fa-user fa-4x"></i>
+          <h4>User credentials</h4>
+        </div>
+        <div class="col-xs-6 why-element">
+          <i class="fa fa-comment fa-4x"></i>
+          <h4>Chat!!</h4>
+        </div>
+        <div class="col-xs-6 why-element">
+          <i class="fa fa-microphone fa-4x"></i>
+          <i class="fa fa-keyboard-o fa-4x"></i>
+          <h4>Speak or Type!</h4>
+        </div>
+        <div class="col-xs-6 why-element">
+          <i class="fa fa-link fa-4x"></i>
+          <h4>Peer to Peer</h4>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/scrollreveal.js/3.1.4/scrollreveal.min.js"></script>
+    <script src="../../../static/js/libs/typed.js"></script>
+    <script src="../../../static/js/animation.js"></script>
+  </body>
+
+</html>

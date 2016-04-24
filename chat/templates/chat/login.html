@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title>3D Chat | Speak Your Language</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../static/css/custom.css">
+	</head>
+	<body class="body-forms">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="../../../static/media/logo.png" alt="logo"></a>
+            </div>
+            <!-- Collect the nav links for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/chatrooms/1">Chat Rooms</a></li>
+
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li><p class="top-right-nav">Welcome {{request.user}}</p></li>
+                <li><a href="logout">Log Out</a></li>
+                {%else%}
+                <li><p class="top-right-nav">Welcome Guest</p></li>
+                {%endif%}
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+        <div class="alert alert-danger" id="not-chrome-error"role="alert">This application doesn't work with your browser, please use Google Chrome!</div>
+        <div class="form-container">
+            {% if errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+        <form method="post" class="form" action="{% url 'django.contrib.auth.views.login'  %}">
+            {% csrf_token %}
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <input type="text" class="input form-control" name="username" placeholder="username"/><br>
+            <input type="password" class="input form-control" name="password" placeholder="password"/>
+            <input type="hidden" class="form_element" name="next" value="{{ next }}"/><br>
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Login"/>
+            <a href="/register">signup</a>
+        </form>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/scrollreveal.js/3.1.4/scrollreveal.min.js"></script>
+        <script src="../../../static/js/libs/typed.js"></script>
+        <script src="../../../static/js/animation.js"></script>
+	</body>
+
+</html>

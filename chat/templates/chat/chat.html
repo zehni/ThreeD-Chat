@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <title>3D Chat | Speak Your Language</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+      <link rel="stylesheet" type="text/css" href="../../../static/css/custom.css">
+      <script src="https://cdn.jsdelivr.net/scrollreveal.js/3.1.4/scrollreveal.min.js"></script>
+      <script src="../../../static/build/tracking-min.js"></script>
+      <script src="../../../static/build/data/face-min.js"></script>
+      <script src="../../../static/build/three.min.js"></script>
+      <script src="../../../static/js/libs/Detector.js"></script>
+      <script src="../../../static/js/3dface.js"></script>
+  </head>
+  <body id="chat-room-body" onload="threed.init()">
+    <nav class="navbar navbar-default" id="nav-chatrooms">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="../../../static/media/logo.png" alt="logo"></a>
+        </div>
+        <!-- Collect the nav links for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/chatrooms/1">Chat Rooms</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li><p class="top-right-nav">Welcome {{request.user}}</p></li>
+            <li><a href="/logout/">Log Out</a></li>
+            {%else%}
+            <li><p class="top-right-nav">Welcome Guest</p></li>
+            {%endif%}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div class="alert alert-danger" id="not-chrome-error"role="alert">This application doesn't work with your browser, please use Google Chrome!</div>
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10 active-chat">
+      <div class="col-xs-12 active-chat-container">
+        <div class="col-xs-2 active-chat-left">
+          <p id="peerUserName">Waiting..</p>
+            <h5 id="chat-msgs-header">Chat Messages</h5>
+            <div id="chat-history">
+            <p id="side-msgs"></p>
+            </div>
+          <div id="info">
+            <div id="myID">{{peer1ID}}</div>
+            <input style="color:black" type="text" name="peerID" value="{{peer2ID}}"><br>
+            <div id="myName">{{request.user}}</div>
+          </div>
+        </div>
+        <div class="col-xs-9 active-chat-face text-center">
+          <div class="demo-frame">
+            <div class="demo-container">
+              <video id="video" width="120vh" height="100vh" preload autoplay loop muted></video>
+
+            </div>
+          </div>
+          <div class="messages-box" id="chatMessages">
+
+          </div>
+          <div id="container-face"></div>
+
+        </div>
+        <div class="col-xs-1 text-center">
+          <div id="div_language">
+            <select class="selectpicker" data-style="btn-success" data-width="fit" id="select_language"></select>
+            &nbsp;&nbsp;
+          </div>
+          <button class="btn btn-danger" id="leaveBtn" onclick="reco.leaveRoom()">leave</button>
+        </div>
+      </div>
+      <div class="col-xs-12 text-center">
+        <div class="navbar-form">
+          <div class="form-group">
+            <textarea class="form-control" id="final_span" rows="3" cols="40"></textarea>
+            <span id="interim_span" class="interim"></span>
+            <button id="start_button" onclick="reco.startButton(event)">
+            <img id="start_img" src="../../../static/media/mic.gif" alt="Start"></button>
+          <button id="copy_button" onclick="reco.sendButton()" class="btn btn-success">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-1"></div>
+
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <script src="../../../static/js/libs/typed.js"></script>
+    <script src="../../../static/js/libs/peer.js"></script>
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+    <script src="../../../static/js/animation.js"></script>
+    <script src="../../../static/js/reco.js"></script>
+    <script src="../../../static/app/controllers/chatRoomController.js"></script>
+    <script src="../../../static/js/libs/jquery.cookie.js"></script>
+
+  </body>
+
+</html>
