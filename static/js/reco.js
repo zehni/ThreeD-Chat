@@ -368,7 +368,6 @@ var reco = (function(){
         conns.on('data', function(data){  // on the receiving of data
             peerLeftFlag = 0;
           // Will print 'hi!'
-          console.log(connectPeerID);
           if (connectPeerID == -1){  // check if we are already connected
             conn = peer.connect(conns.peer);
             conn.on('open', function(){
@@ -407,14 +406,12 @@ var reco = (function(){
 
           // if received the signal that the other peer disconnected
           conn.on('disconnected', function(){
-              console.log("h1");
               if (peerLeftFlag == 0)
                 peerLeft();
           });
 
           // if received the signal that the other peer closed
           conn.on('close', function(){
-              console.log("h2");
               if (peerLeftFlag == 0)
                 peerLeft();
           });
@@ -450,7 +447,6 @@ var reco = (function(){
         window.location.href = "/chatrooms/1";
 
       connectPeerID = -1; // reset the connect peer ID to -1 since we aren't connected anymore
-      console.log(connectPeerID);
     }
 
     // function being called to connect to a peer
@@ -462,7 +458,6 @@ var reco = (function(){
         return;
       }
 
-      console.log(peerID);
 
       conn = peer.connect(peerID);
 
