@@ -6,7 +6,7 @@ var reco = (function(){
     [['English',         ['en-US', 'United States']],
      ['Français',        ['fr-FR']]];
 
-     // a dictionary to map language to the speech person. 
+     // a dictionary to map language to the speech person.
      //To add a new language, you can add the language as a key and the person as a value
     var voice = {'English': 'US English Female', 'Français' : 'French Female'};
 
@@ -53,7 +53,7 @@ var reco = (function(){
         }
         if (event.error == 'not-allowed') {
           if (event.timeStamp - start_timestamp < 100) {
-          } 
+          }
           ignore_onend = true;
         }
       };
@@ -130,7 +130,7 @@ var reco = (function(){
       // get the language selected
       var langselected = langs[select_language.selectedIndex][0];
 
-      // this portion of code translate the text 
+      // this portion of code translate the text
       // only using English and French, This portion need to be modified a bit if more languages need to be added
       if(langselected == "English"){  // if language selected is English then translate from French to English
         $.getJSON( yandexAPI, {
@@ -163,7 +163,7 @@ var reco = (function(){
       // get the language selected
         var langselected = langs[select_language.selectedIndex][0];
 
-        // this portion of code translate the text 
+        // this portion of code translate the text
         // only using English and French, This portion need to be modified a bit if more languages need to be added
         if(langselected == "English"){  // if language selected is English then translate from French to English
           $.getJSON( yandexAPI, {
@@ -185,9 +185,9 @@ var reco = (function(){
           .success(function(data, status){
               addStatusMessage(data.text[0], voice[langs[select_language.selectedIndex][0]]);
           });
-        } 
+        }
     }
-  
+
 
 
     // The wait functions are used for the mouth movement
@@ -234,7 +234,7 @@ var reco = (function(){
       msgs.innerHTML = '<div class="message-text-wrapper"><p class="message-text"><span class="username2">' + connectedPeerName + ': </span>' + text+'</p></div>';
       sideMsgs.innerHTML += "<p>" + connectedPeerName + ": " + text + "</p>";
       //Fading out the message
-      setTimeout(function() {  
+      setTimeout(function() {
       $('#chatMessages').fadeOut();
       }, 3000 );
       $('#chatMessages').show();
@@ -268,7 +268,7 @@ var reco = (function(){
       wait();
     }
 
-    // add the User meessage (my messages) to the UI 
+    // add the User meessage (my messages) to the UI
     function addMessage(text){
       var sideMsgs = document.getElementById("side-msgs");
       var msgs = document.getElementById("chatMessages");
@@ -354,7 +354,9 @@ var reco = (function(){
     // flag to check if the leave button was pressed
     var leaveFlag = 0;
 
-    // a function is called in the beginning, it starts the connection 
+    var peerLeftFlag = 0;
+
+    // a function is called in the beginning, it starts the connection
     function startConnection(){
 
       var myID = document.getElementById("myID").innerHTML;
@@ -364,8 +366,10 @@ var reco = (function(){
       // event handling when someone connects to the user (current peer)
       peer.on('connection', function(conns) {
         conns.on('data', function(data){  // on the receiving of data
+            peerLeftFlag = 0;
           // Will print 'hi!'
-          if (connectPeerID == -1){  // check if we are already connected 
+          console.log(connectPeerID);
+          if (connectPeerID == -1){  // check if we are already connected
             conn = peer.connect(conns.peer);
             conn.on('open', function(){
                var a = {'language': langs[select_language.selectedIndex][0],
@@ -373,12 +377,12 @@ var reco = (function(){
                         'name': myName};
 
               a.text = "you are connected to " + a.name;
-              conn.send(JSON.stringify(a));   
+              conn.send(JSON.stringify(a));
             });
             connectPeerID = conns.peer;
           } else{
             if (connectPeerID !== conns.peer){
-               return;  // not allow more connections 
+               return;  // not allow more connections
             }
           }
 
@@ -403,12 +407,16 @@ var reco = (function(){
 
           // if received the signal that the other peer disconnected
           conn.on('disconnected', function(){
-            peerLeft();        
+              console.log("h1");
+              if (peerLeftFlag == 0)
+                peerLeft();
           });
 
           // if received the signal that the other peer closed
           conn.on('close', function(){
-            peerLeft();
+              console.log("h2");
+              if (peerLeftFlag == 0)
+                peerLeft();
           });
 
         });
@@ -416,12 +424,13 @@ var reco = (function(){
       });
 
       roomID = getRoomID();
-  
+
     // event handler being called when user click on a link, change the url, or close the window/tab
       $(window).bind('beforeunload', function() {
-          if (leaveFlag == 0)  // check if the leave button was clicked and if not do the following
+          if (leaveFlag == 0){  // check if the leave button was clicked and if not do the following
             leaveRoom();    // cal leave the room, to send to the db to update the entry
             peer.disconnect(); // disconnect the peer (send the signal to the other peer)
+        }
       });
 
 
@@ -429,6 +438,7 @@ var reco = (function(){
 
     // function is called when peer leaves to redirect and show that a peer has left in the UI
     function peerLeft(){
+        peerLeftFlag = 1;
       var msg = connectedPeerName + " has left the room";
       //addStatusMessage(msg, "US English Female");
       translateStatus(msg);
@@ -436,11 +446,11 @@ var reco = (function(){
       document.querySelector("#peerUserName").innerHTML = "Waiting..";
 
       // if I am not the creator and the peer left (he was the creator of the room) .. get redirected to the chatrooms page
-      if (amICreator === 0)
+      if (amICreator == 0)
         window.location.href = "/chatrooms/1";
 
       connectPeerID = -1; // reset the connect peer ID to -1 since we aren't connected anymore
-
+      console.log(connectPeerID);
     }
 
     // function being called to connect to a peer
@@ -450,7 +460,9 @@ var reco = (function(){
       if (peerID === ""){ // if i am the creator don't do anything (we don't connect to anyone .. yet)
         amICreator = 1;
         return;
-      } 
+      }
+
+      console.log(peerID);
 
       conn = peer.connect(peerID);
 
@@ -479,7 +491,7 @@ var reco = (function(){
       chatRoomController.setupAjax();
       var urlReq = "/chat/" + roomID +"/leaveRoom/";
 
-      // set the leave flag to 1 
+      // set the leave flag to 1
       leaveFlag = 1;
 
       // send an ajax request to update the db
